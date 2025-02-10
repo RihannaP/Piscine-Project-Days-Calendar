@@ -23,8 +23,6 @@ let nextBtn =document.createElement ('button')// it creates the next month butto
     document.body.appendChild(nextBtn); 
     nextBtn.addEventListener('click', ()=>{nextMonthBtn(currentYear, currentMonth)})// adds an event listener to the button 
 
-    
-
 function renderCalendar(){
     let grid = monthgrid(currentYear, currentMonth)
     let dayOne = new Date(year, month, 1).getDay()
