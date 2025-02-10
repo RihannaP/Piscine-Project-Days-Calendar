@@ -72,3 +72,21 @@ function nextMonthBtn(year, month){// creating the function to move to the next 
         currentYear ++ // goes to the next year 
     }
 }
+//year selection dropdown 
+let yearSelect = document.createElement('select');
+for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+    let option = document.createElement('option');
+    option.value = i;
+    option.textContent = i;
+    if (i === currentYear) {
+        option.selected = true;
+    }
+    yearSelect.appendChild(option);
+}
+document.body.appendChild(yearSelect);
+
+// calendar change when year is changed
+yearSelect.addEventListener('change', function() {
+    currentYear = parseInt(this.value);
+    renderCalendar();
+});
