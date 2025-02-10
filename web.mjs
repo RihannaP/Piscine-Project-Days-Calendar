@@ -26,7 +26,7 @@ function nextMonthBtn(year, month){// creating the function to move to the next 
         month = 0 // loops back to january 
         year ++ // goes to the next year 
     }
-
+}
 import { getGreeting, } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
