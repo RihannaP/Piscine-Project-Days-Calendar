@@ -17,9 +17,9 @@
 let nextBtn =document.createElement ('button')// it creates the next month button 
     nextBtn.innerHTML = "Next"
     document.body.appendChild(nextBtn); 
-    nextBtn.addEventListener('click', ()=>{nextMothBtn(currentYear, currentMonth)})// adds an event listener to the button 
+    nextBtn.addEventListener('click', ()=>{nextMonthBtn(currentYear, currentMonth)})// adds an event listener to the button 
 
-function nextMothBtn(year, month){// creating the function to move to the next month 
+function nextMonthBtn(year, month){// creating the function to move to the next month 
     month ++ // moves to the next month
     if (month > 11){// the year transition past December 
         month = 0 // loops back to january 
