@@ -1,24 +1,69 @@
-// This is a placeholder file which shows how you can access functions and data defined in other files.
-// It can be loaded into index.html.
-// Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
-// You can't open the index.html file using a file:// URL.
 
+import { monthgrid, } from "./common.mjs";
+import daysData from "./days.json" with { type: "json" };
 
-// import { getGreeting } from "./common.mjs";
-// import daysData from "./days.json" with { type: "json" };
+window.onload = function() {
+    renderCalendar()
 
-// window.onload = function() {
-//     document.querySelector("body").innerText = `${getGreeting()} - there are ${daysData.length} known days`;
-// }
+    // Event listeners for previous buttons
+    previousBtn.addEventListener("click", ()=> {previousMonthBtn(currentYear, currentMonth)})
+}
 
-// Setting up the  current year and month (starting values)
-// let currentYear = new Date().getFullYear();
-// let currentMonth = new Date().getMonth();
+let currentMonth = new Date().getMonth() // between 0 to 11
+let currentYear = new Date().getFullYear()
+
+let calendar = document.createElement('div')
+    document.body.appendChild(calendar)
+let previousBtn = document.createElement('button')
+    previousBtn.innerHTML = "Prev"
+    document.body.appendChild(previousBtn);
 
 let nextBtn =document.createElement ('button')// it creates the next month button 
     nextBtn.innerHTML = "Next"
     document.body.appendChild(nextBtn); 
     nextBtn.addEventListener('click', ()=>{nextMonthBtn(currentYear, currentMonth)})// adds an event listener to the button 
+
+function renderCalendar(){
+    let grid = monthgrid(currentYear, currentMonth)   
+    let calendarTableHTML = ""
+    calendarTableHTML = `
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+            </thead>
+        <tbody>
+    `
+    
+    grid.forEach(week =>{
+        calendarTableHTML += `<tr>`
+        week.forEach((day) =>{
+            calendarTableHTML += `
+                <td class="day">${day || ""}</td>
+                `;
+        })
+        calendarTableHTML += `<tr>`
+    })
+    calendarTableHTML+= `</body></table>`
+    document.querySelector("div").innerHTML = calendarTableHTML;
+}
+
+// Function for moving to previous Month
+function previousMonthBtn(year, month){
+    currentMonth --
+    if (currentMonth < 0){
+        currentMonth = 11
+        currentYear --
+    }
+   renderCalendar()
+}
 
 function nextMonthBtn(year, month){// creating the function to move to the next month 
     month ++ // moves to the next month
@@ -26,31 +71,4 @@ function nextMonthBtn(year, month){// creating the function to move to the next 
         month = 0 // loops back to january 
         year ++ // goes to the next year 
     }
-}
-import { getGreeting, } from "./common.mjs";
-import daysData from "./days.json" with { type: "json" };
-
-let currentMonth = new Date().getMonth() // between 0 to 11
-let currentYear = new Date().getFullYear()
-
-window.onload = function() {
-  let previousBtn = document.createElement('button')
-    previousBtn.innerHTML = "Prev"
-    document.body.appendChild(previousBtn);
-    previousBtn.addEventListener("click", ()=> {previousMonthBtn(currentYear, currentMonth)})
-    //document.querySelector("body").innerText = `${getGreeting()} - there are ${daysData.length} known days`;
-}
-
-function renderCalendar(){
-
-}
-
-// Event listeners for previous buttons
-function previousMonthBtn(year, month){
-    month --
-    if (month < 0){
-        month = 11
-        year --
-    }
-   // renderCalendar()
 }
