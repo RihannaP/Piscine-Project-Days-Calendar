@@ -66,9 +66,27 @@ function previousMonthBtn(year, month){
 }
 
 function nextMonthBtn(year, month){// creating the function to move to the next month 
-    month ++ // moves to the next month
-    if (month > 11){// the year transition past December 
-        month = 0 // loops back to january 
-        year ++ // goes to the next year 
+    currentMonth ++ // moves to the next month
+    if ( currentMonth> 11){// the year transition past December 
+        currentMonth = 0 // loops back to january 
+        currentYear ++ // goes to the next year 
     }
 }
+//year selection dropdown 
+let yearSelect = document.createElement('select');
+for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+    let option = document.createElement('option');
+    option.value = i;
+    option.textContent = i;
+    if (i === currentYear) {
+        option.selected = true;
+    }
+    yearSelect.appendChild(option);
+}
+document.body.appendChild(yearSelect);
+
+// calendar change when year is changed
+yearSelect.addEventListener('change', function() {
+    currentYear = parseInt(this.value);
+    renderCalendar();
+});
