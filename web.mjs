@@ -2,9 +2,12 @@
 import { monthgrid, } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
-// window.onload = function() {
-//     document.querySelector("body").innerText = `${getGreeting()} - there are ${daysData.length} known days`;
-// }
+window.onload = function() {
+    renderCalendar()
+
+    // Event listeners for previous buttons
+    previousBtn.addEventListener("click", ()=> {previousMonthBtn(currentYear, currentMonth)})
+}
 
 let currentMonth = new Date().getMonth() // between 0 to 11
 let currentYear = new Date().getFullYear()
@@ -20,23 +23,44 @@ let nextBtn =document.createElement ('button')// it creates the next month butto
     document.body.appendChild(nextBtn); 
     nextBtn.addEventListener('click', ()=>{nextMonthBtn(currentYear, currentMonth)})// adds an event listener to the button 
 
-    window.onload = function() {
-        renderCalendar()
-        previousBtn.addEventListener("click", ()=> {previousMonthBtn(currentYear, currentMonth)})
-        //document.querySelector("body").innerText = `${getGreeting()} - there are ${daysData.length} known days`;
-    }
+    
 
 function renderCalendar(){
     let grid = monthgrid(currentYear, currentMonth)
-   // let dayOne = new Date(year, month, 1).getDay()
-    let calendarHTML = ""
-    grid.forEach((day) =>{
-       calendarHTML += `<div class="day">${day || ""}</div>`;
-    })
-    document.querySelector("div").innerHTML = calendarHTML;
+    let dayOne = new Date(year, month, 1).getDay()
+   let week = new Array(7).fill(null);
+    let calendarTableHTML = ""
+    calendarTableHTML = `
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                    <th>Sun</th>
+                </tr>
+            </thead>
+        <tbody>
+    `
+    
+        
+    for(let i= 0; i <7; i++ ){
+        calendarTableHTML += `<tr>`
+        grid.forEach((day) =>{
+       calendarTableHTML += `
+       <td class="day">${day || ""}</td>
+       `;
+        })
+    calendarTableHTML += `<tr>`
+    }
+    calendarTableHTML+= `</body></table>`
+    document.querySelector("div").innerHTML = calendarTableHTML;
 }
 
-// Event listeners for previous buttons
+// Function for moving to previous Month
 function previousMonthBtn(year, month){
     currentMonth --
     if (currentMonth < 0){
