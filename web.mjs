@@ -71,6 +71,7 @@ function nextMonthBtn(year, month){// creating the function to move to the next 
         currentMonth = 0 // loops back to january 
         currentYear ++ // goes to the next year 
     }
+    renderCalendar()
 }
 //year selection dropdown 
 let yearSelect = document.createElement('select');
