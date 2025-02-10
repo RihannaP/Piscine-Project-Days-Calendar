@@ -18,22 +18,6 @@ function monthgrid(year, month){
     return gridArray;
 
 }
-function nextMonthBtn(year, month){// creating the function to move to the next month 
-    month ++ // moves to the next month
-    if (month > 11){// the year transition past December 
-        month = 0 // loops back to january 
-        year ++ // goes to the next year 
-
-    }
-
-    function previousMonthBtn(year, month){
-    month --
-    if (month < 0){
-        month = 11
-        year --
-    }
-   // renderCalendar()
-}
 
 
 
