@@ -24,36 +24,33 @@ let nextBtn =document.createElement ('button')// it creates the next month butto
     nextBtn.addEventListener('click', ()=>{nextMonthBtn(currentYear, currentMonth)})// adds an event listener to the button 
 
 function renderCalendar(){
-    let grid = monthgrid(currentYear, currentMonth)
-    let dayOne = new Date(year, month, 1).getDay()
-   let week = new Array(7).fill(null);
+    let grid = monthgrid(currentYear, currentMonth)   
     let calendarTableHTML = ""
     calendarTableHTML = `
         <table border="1">
             <thead>
                 <tr>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                    <th>Sun</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
                 </tr>
             </thead>
         <tbody>
     `
     
-        
-    for(let i= 0; i <7; i++ ){
+    grid.forEach(week =>{
         calendarTableHTML += `<tr>`
-        grid.forEach((day) =>{
-       calendarTableHTML += `
-       <td class="day">${day || ""}</td>
-       `;
+        week.forEach((day) =>{
+            calendarTableHTML += `
+                <td class="day">${day || ""}</td>
+                `;
         })
-    calendarTableHTML += `<tr>`
-    }
+        calendarTableHTML += `<tr>`
+    })
     calendarTableHTML+= `</body></table>`
     document.querySelector("div").innerHTML = calendarTableHTML;
 }
