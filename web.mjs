@@ -54,3 +54,11 @@ function previousMonthBtn(year, month){
     }
    // renderCalendar()
 }
+
+// the dropdown year selector
+let yearDropdown = document.createElement ('select');
+yearDropdown.id = "yearDropdown";
+document.body.appendChild(yearDropdown);
+
+//to fill out the dropdown with years range
+for (let year = currentYear -10; year )
