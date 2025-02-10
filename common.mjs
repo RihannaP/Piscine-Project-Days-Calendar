@@ -8,20 +8,24 @@ function getGreeting() {
 
 function monthgrid(year, month){
     let today = new Date();
-    //let dayOne = new Date(year, month, 1).getDay()
+    let dayOne = new Date(year, month, 1).getDay()
     let LastDate = new Date(year, month+1, 0).getDate()
     //let dayEnd = new Date(year, month, LastDate ).getDay()
     let gridArray =[]
     for(let i=1; i<=LastDate; i++){
         gridArray.push(i)
     }
-    return gridArray;
+    for (let i = 0; i < dayOne; i++) {
+        gridArray.push(null); // Empty cells before the first day
+    }
+   return gridArray;
 
 }
 
 
 
 
+monthgrid(2025, 1)
 
 
 
@@ -36,5 +40,4 @@ function monthgrid(year, month){
 
 
 
-
-//export{getGreeting, renderMonthTable }
+export{monthgrid }
