@@ -91,3 +91,21 @@ yearSelect.addEventListener('change', function() {
     currentYear = parseInt(this.value);
     renderCalendar();
 });
+
+let monthSelect = document.createElement('select');
+// Array of months as strings
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  months.map((item, index) => {
+    let option = document.createElement('option');
+    option.value = index
+    option.textContent = item
+    if(index === currentMonth){ option.selected = true}
+    monthSelect.append(option);
+})
+document.body.append(monthSelect)
+
+// calendar change when Month is changed
+monthSelect.addEventListener('change', function() {
+    currentMonth = parseInt(this.value);
+    renderCalendar();
+});
