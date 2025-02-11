@@ -23,28 +23,7 @@ The goal is to present this data **usefully and interactively** for users, allow
 ✔️ **iCal Export (for groups of 2+)** - Generates an `.ics` file for Google Calendar imports.  
 ✔️ **Event Descriptions (for groups of 3+)** - Clicking on an event fetches more details.  
 
----
 
-## 📁 Project Structure  
-
-```
-/calendar-app
- ├── index.html               # Main HTML file
- ├── scripts/
- │   ├── main.js              # Entry point for initialization
- │   ├── buttons.js           # Handles button functionality
- │   ├── selectors.js         # Handles dropdown selectors
- │   ├── calendar.js          # Calendar rendering logic
- │   ├── utils.js             # Helper functions
- ├── styles/
- │   ├── styles.css           # Styling file
- ├── data/
- │   ├── days.json            # JSON file containing commemorative days
- ├── common.mjs               # Shared functions
- ├── README.md                # Project documentation
-```
-
----
 
 ## 🎯 Usage  
 
