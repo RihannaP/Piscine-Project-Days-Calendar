@@ -6,14 +6,39 @@ window.onload = function() {
     renderCalendar()
 
     // Event listeners for previous buttons
-    previousBtn.addEventListener("click", ()=> {previousMonthBtn(currentYear, currentMonth)})
+    previousBtn.addEventListener("click", ()=> {previousMonthBtn()})
 }
 
 let currentMonth = new Date().getMonth() // between 0 to 11
 let currentYear = new Date().getFullYear()
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-let calendar = document.createElement('div')
-    document.body.appendChild(calendar)
+let container = document.createElement("div");
+container.classList.add("calendar-container");
+
+// let sidebar = document.createElement("div");
+// sidebar.classList.add("sidebar");
+// sidebar.innerHTML = `
+//     <div class="weather">
+//         <p>12°C</p>
+//         <p>PARTLY SUNNY</p>
+//     </div>
+//     <div class="tasks">
+//         <div class="task">09:00 - Send a message to James</div>
+//         <div class="task">11:00 - Visit a Neil bar</div>
+//         <div class="task">15:00 - Make a dinner for Carl</div>
+//     </div>
+// `;
+
+let calendar = document.createElement("div");
+calendar.classList.add("calendar");
+
+//container.appendChild(sidebar);
+container.appendChild(calendar);
+document.body.appendChild(container);
+    
+
+
 let previousBtn = document.createElement('button')
     previousBtn.innerHTML = "Prev"
     document.body.appendChild(previousBtn);
@@ -27,6 +52,8 @@ function renderCalendar(){
     let grid = monthgrid(currentYear, currentMonth)   
     let calendarTableHTML = ""
     calendarTableHTML = `
+        <h2>${months[currentMonth]} ${currentYear}</h2>
+
         <table border="1">
             <thead>
                 <tr>
@@ -49,14 +76,14 @@ function renderCalendar(){
                 <td class="day">${day || ""}</td>
                 `;
         })
-        calendarTableHTML += `<tr>`
+        calendarTableHTML += `</tr>`
     })
     calendarTableHTML+= `</body></table>`
-    document.querySelector("div").innerHTML = calendarTableHTML;
+    calendar.innerHTML = calendarTableHTML;
 }
 
 // Function for moving to previous Month
-function previousMonthBtn(year, month){
+function previousMonthBtn(){
     currentMonth --
     if (currentMonth < 0){
         currentMonth = 11
@@ -92,9 +119,9 @@ yearSelect.addEventListener('change', function() {
     renderCalendar();
 });
 
+
 let monthSelect = document.createElement('select');
 // Array of months as strings
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   months.map((item, index) => {
     let option = document.createElement('option');
     option.value = index
@@ -109,3 +136,9 @@ monthSelect.addEventListener('change', function() {
     currentMonth = parseInt(this.value);
     renderCalendar();
 });
+
+
+
+
+
+export{renderCalendar, }
