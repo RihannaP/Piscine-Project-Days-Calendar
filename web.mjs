@@ -82,6 +82,7 @@ function renderCalendar() {
     });
 
     calendarTableHTML += "</tbody></table>";
+
     calendar.innerHTML = calendarTableHTML;
 }
 // this helps to assess if the date is a commemorative day
