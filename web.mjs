@@ -3,10 +3,7 @@ import { monthgrid, } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
 window.onload = function() {
-    renderCalendar()
-
-    // Event listeners for previous buttons
-    previousBtn.addEventListener("click", ()=> {previousMonthBtn()})
+    renderCalendar()    
 }
 
 let currentMonth = new Date().getMonth() // between 0 to 11
@@ -16,37 +13,17 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
 let container = document.createElement("div");
 container.classList.add("calendar-container");
 
-// let sidebar = document.createElement("div");
-// sidebar.classList.add("sidebar");
-// sidebar.innerHTML = `
-//     <div class="weather">
-//         <p>12°C</p>
-//         <p>PARTLY SUNNY</p>
-//     </div>
-//     <div class="tasks">
-//         <div class="task">09:00 - Send a message to James</div>
-//         <div class="task">11:00 - Visit a Neil bar</div>
-//         <div class="task">15:00 - Make a dinner for Carl</div>
-//     </div>
-// `;
 
 let calendar = document.createElement("div");
 calendar.classList.add("calendar");
 
-//container.appendChild(sidebar);
 container.appendChild(calendar);
 document.body.appendChild(container);
     
 
 
-let previousBtn = document.createElement('button')
-    previousBtn.innerHTML = "Prev"
-    document.body.appendChild(previousBtn);
+////////////// CALENDAR////////////
 
-let nextBtn =document.createElement ('button')// it creates the next month button 
-    nextBtn.innerHTML = "Next"
-    document.body.appendChild(nextBtn); 
-    nextBtn.addEventListener('click', ()=>{nextMonthBtn(currentYear, currentMonth)})// adds an event listener to the button 
 
 function renderCalendar(){
     let grid = monthgrid(currentYear, currentMonth)   
@@ -82,6 +59,18 @@ function renderCalendar(){
     calendar.innerHTML = calendarTableHTML;
 }
 
+////////////// BUTTON////////////
+
+let previousBtn = document.createElement('button')
+    previousBtn.innerHTML = "Prev"
+    document.body.appendChild(previousBtn);
+    previousBtn.addEventListener("click", ()=> {previousMonthBtn()})
+
+let nextBtn =document.createElement ('button')
+    nextBtn.innerHTML = "Next"
+    document.body.appendChild(nextBtn); 
+    nextBtn.addEventListener('click', ()=>{nextMonthBtn(currentYear, currentMonth)})// adds an event listener to the button 
+
 // Function for moving to previous Month
 function previousMonthBtn(){
     currentMonth --
@@ -100,6 +89,10 @@ function nextMonthBtn(year, month){// creating the function to move to the next 
     }
     renderCalendar()
 }
+
+
+////////////// SELECTION////////////
+
 //year selection dropdown 
 let yearSelect = document.createElement('select');
 for (let i = currentYear - 10; i <= currentYear + 10; i++) {
