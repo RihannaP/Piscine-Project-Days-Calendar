@@ -173,3 +173,19 @@ select {
 select:hover {
     border-color: #E74C3C;
 }
+.commemorative-day:hover {
+    background-color: orange;
+    cursor: pointer;
+}
+.commemorative-day {
+      background-color: gold !important; /* Highlighted background */
+      font-weight: bold;
+      border-radius: 5px;
+      text-align: center;
+  }
+  
+.event {
+      font-size: 0.8em;
+      color: red;
+      display: block;
+  }
