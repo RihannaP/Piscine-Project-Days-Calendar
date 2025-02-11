@@ -1,0 +1,175 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: #0A2A5E; /* Dark blue background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Calendar Wrapper */
+.calendar-container {
+    display: flex;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar (Weather & Tasks) */
+.sidebar {
+    background: #5A7FF0; /* Light blue */
+    color: white;
+    padding: 20px;
+    width: 35%;
+}
+
+.weather {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.tasks {
+    margin-top: 20px;
+}
+
+.task {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+/* Calendar Section */
+.calendar {
+    width: 65%;
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #E74C3C;
+    margin-bottom: 10px;
+}
+
+/* Navigation */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.nav-btn {
+    background: #E74C3C;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.nav-btn:hover {
+    background: #C0392B;
+}
+
+/* Year Selector */
+.year-select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+/* Calendar Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    width: 14.2%;
+    height: 50px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background: #f5f5f5;
+    font-weight: bold;
+}
+
+td {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Active Date */
+td.active {
+    background: #E74C3C;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+}
+/* General Button Styles */
+button {
+    background: #E74C3C; /* Red theme */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin: 10px;
+}
+
+/* Hover effect */
+button:hover {
+    background: #C0392B; /* Darker red on hover */
+    transform: scale(1.05);
+}
+
+/* Active (click) effect */
+button:active {
+    transform: scale(0.95);
+}
+
+/* Disabled Button */
+button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+/* Navigation Buttons Wrapper */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+/* Dropdown Styles */
+select {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+select:hover {
+    border-color: #E74C3C;
+}

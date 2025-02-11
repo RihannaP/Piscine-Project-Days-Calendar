@@ -3,30 +3,34 @@ import { monthgrid, } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
 window.onload = function() {
-    renderCalendar()
-
-    // Event listeners for previous buttons
-    previousBtn.addEventListener("click", ()=> {previousMonthBtn(currentYear, currentMonth)})
+    renderCalendar()    
 }
 
 let currentMonth = new Date().getMonth() // between 0 to 11
 let currentYear = new Date().getFullYear()
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-let calendar = document.createElement('div')
-    document.body.appendChild(calendar)
-let previousBtn = document.createElement('button')
-    previousBtn.innerHTML = "Prev"
-    document.body.appendChild(previousBtn);
+let container = document.createElement("div");
+container.classList.add("calendar-container");
 
-let nextBtn =document.createElement ('button')// it creates the next month button 
-    nextBtn.innerHTML = "Next"
-    document.body.appendChild(nextBtn); 
-    nextBtn.addEventListener('click', ()=>{nextMonthBtn(currentYear, currentMonth)})// adds an event listener to the button 
+
+let calendar = document.createElement("div");
+calendar.classList.add("calendar");
+
+container.appendChild(calendar);
+document.body.appendChild(container);
+    
+
+
+////////////// CALENDAR////////////
+
 
 function renderCalendar(){
     let grid = monthgrid(currentYear, currentMonth)   
     let calendarTableHTML = ""
     calendarTableHTML = `
+        <h2>${months[currentMonth]} ${currentYear}</h2>
+
         <table border="1">
             <thead>
                 <tr>
@@ -63,10 +67,20 @@ console.log("Events for current month:", eventsForMonth);
     calendarTableHTML += `<td ${eventClass}>${day || ""}${eventName}</td>`;
         });          
     
-    calendarTableHTML += `<tr>`;// closes the row
-    });
+
+
+    grid.forEach(week =>{
+        calendarTableHTML += `<tr>`
+        week.forEach((day) =>{
+            calendarTableHTML += `
+                <td class="day">${day || ""}</td>
+                `;
+        })
+        calendarTableHTML += `</tr>`
+    })
+
     calendarTableHTML+= `</body></table>`
-    document.querySelector("div").innerHTML = calendarTableHTML;
+    calendar.innerHTML = calendarTableHTML;
 }
 // this helps to assess if the date is a commemorative day
 
@@ -100,8 +114,20 @@ function isEventDay(event, year, month, day) {
 }
 
 
+////////////// BUTTON////////////
+
+let previousBtn = document.createElement('button')
+    previousBtn.innerHTML = "Prev"
+    document.body.appendChild(previousBtn);
+    previousBtn.addEventListener("click", ()=> {previousMonthBtn()})
+
+let nextBtn =document.createElement ('button')
+    nextBtn.innerHTML = "Next"
+    document.body.appendChild(nextBtn); 
+    nextBtn.addEventListener('click', ()=>{nextMonthBtn(currentYear, currentMonth)})// adds an event listener to the button 
+
 // Function for moving to previous Month
-function previousMonthBtn(year, month){
+function previousMonthBtn(){
     currentMonth --
     if (currentMonth < 0){
         currentMonth = 11
@@ -118,6 +144,10 @@ function nextMonthBtn(year, month){// creating the function to move to the next 
     }
     renderCalendar()
 }
+
+
+////////////// SELECTION////////////
+
 //year selection dropdown 
 let yearSelect = document.createElement('select');
 for (let i = currentYear - 10; i <= currentYear + 10; i++) {
@@ -136,3 +166,27 @@ yearSelect.addEventListener('change', function() {
     currentYear = parseInt(this.value);
     renderCalendar();
 });
+
+
+let monthSelect = document.createElement('select');
+// Array of months as strings
+  months.map((item, index) => {
+    let option = document.createElement('option');
+    option.value = index
+    option.textContent = item
+    if(index === currentMonth){ option.selected = true}
+    monthSelect.append(option);
+})
+document.body.append(monthSelect)
+
+// calendar change when Month is changed
+monthSelect.addEventListener('change', function() {
+    currentMonth = parseInt(this.value);
+    renderCalendar();
+});
+
+
+
+
+
+export{renderCalendar, }
