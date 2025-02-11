@@ -67,15 +67,6 @@ console.log("Events for current month:", eventsForMonth);
     calendarTableHTML += `<td ${eventClass}>${day || ""}${eventName}</td>`;
         });          
     
-
-
-    grid.forEach(week =>{
-        calendarTableHTML += `<tr>`
-        week.forEach((day) =>{
-            calendarTableHTML += `
-                <td class="day">${day || ""}</td>
-                `;
-        })
         calendarTableHTML += `</tr>`
     })
 
