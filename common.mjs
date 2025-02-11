@@ -59,9 +59,6 @@ function renderCalendar() {
     );
 //debugging console log
     console.log("All Events Data:", daysData);
-
-    // console.log("Filtered Events for", months[currentMonth], currentYear, ":", eventsForMonth);
-
     console.log("Filtered Events:", eventsForMonth);
 
 
@@ -83,7 +80,6 @@ function renderCalendar() {
                     console.log(`No event for day ${day}`); 
                 }
             }
-            // console.log(`Day : ${day}, Event: ${eventName}, Class: ${eventClass}`); // debug commemorative day 
 
             calendarTableHTML += `<td ${eventClass}>${day || ""} ${eventName}</td>`;
         });          
@@ -131,10 +127,7 @@ function isEventDay(event, year, month, day) {
     return false;
 }
 
-
-
-
-//monthgrid(2025, 1)                                                 
+                                              
 
 
 
