@@ -120,3 +120,56 @@ td.active {
     font-weight: bold;
     border-radius: 50%;
 }
+/* General Button Styles */
+button {
+    background: #E74C3C; /* Red theme */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin: 10px;
+}
+
+/* Hover effect */
+button:hover {
+    background: #C0392B; /* Darker red on hover */
+    transform: scale(1.05);
+}
+
+/* Active (click) effect */
+button:active {
+    transform: scale(0.95);
+}
+
+/* Disabled Button */
+button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+/* Navigation Buttons Wrapper */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+/* Dropdown Styles */
+select {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+select:hover {
+    border-color: #E74C3C;
+}
