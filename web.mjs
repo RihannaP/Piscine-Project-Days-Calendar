@@ -45,6 +45,7 @@ function renderCalendar(){
 let eventsForMonth = daysData.filter(event => 
     new Date (`${event.monthName} 1, ${currentYear}`).getMonth() === currentMonth
 );
+console.log("Events for current month:", eventsForMonth);
     // updated the code to integrate the commmemorative days 
     grid.forEach(week => {
         calendarTableHTML += `<tr>`;
@@ -78,8 +79,9 @@ function isEventDay(event, year, month, day) {
     }
    
     let occurrenceCount = 0;
+   
 
-    for (let d = 1; d <= day; d++) {
+    for (let d = 1; d <= 31; d++) {
         let tempDate = new Date(year, month, d);
         if (tempDate.toLocaleString('en-us', { weekday: 'long' }) === event.dayName) {
             occurrenceCount++;
