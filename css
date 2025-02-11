@@ -1,0 +1,11 @@
+<style>
+    .commemorative-day {
+        background-color: yellow;
+        font-weight: bold;
+    }
+    .event {
+        font-size: 12px;
+        color: red;
+        display: block;
+    }
+</style>
