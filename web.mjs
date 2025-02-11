@@ -59,7 +59,7 @@ function renderCalendar() {
     grid.forEach(week => {
         calendarTableHTML += "<tr>";
         week.forEach(day => {
-            console.log("Checking day:", day);
+            console.log("Checking day:", day);// debugging and checking if the day is correctly showing
             let eventName = "";
             let eventClass = "";
             
