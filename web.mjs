@@ -41,19 +41,62 @@ function renderCalendar(){
             </thead>
         <tbody>
     `
+    // get events for the current month  
+let eventsForMonth = daysData.filter(event => 
+    new Date (`${event.monthName} 1, ${currentYear}`).getMonth() === currentMonth
+);
+    // updated the code to integrate the commmemorative days 
+    grid.forEach(week => {
+        calendarTableHTML += `<tr>`;
+        week.forEach(day => {
+            let eventName = "";
+            let eventClass = "";
+            
+        if (day){
+            let event = eventsForMonth.find (e => isEventDay (e, currentYear, currentMonth, day) );
+            if (event){
+                eventName =`<br><span class = "event"> ${event.name}</span>`;
+                eventClass = `class = "commemorative-day"`;
+            }
+        }
+    calendarTableHTML += `<td ${eventClass}>${day || ""}${eventName}</td>`;
+        });          
     
-    grid.forEach(week =>{
-        calendarTableHTML += `<tr>`
-        week.forEach((day) =>{
-            calendarTableHTML += `
-                <td class="day">${day || ""}</td>
-                `;
-        })
-        calendarTableHTML += `<tr>`
-    })
+    calendarTableHTML += `<tr>`;// closes the row
+    });
     calendarTableHTML+= `</body></table>`
     document.querySelector("div").innerHTML = calendarTableHTML;
 }
+// this helps to assess if the date is a commemorative day
+
+function isEventDay(event, year, month, day) {
+    let eventDate = new Date(year, month, day);
+    let eventDayName = eventDate.toLocaleString('en-us', { weekday: 'long' });
+
+    if (event.dayName !== eventDayName) {
+        return false; // if not the correct weekday
+    }
+   
+    let occurrenceCount = 0;
+
+    for (let d = 1; d <= day; d++) {
+        let tempDate = new Date(year, month, d);
+        if (tempDate.toLocaleString('en-us', { weekday: 'long' }) === event.dayName) {
+            occurrenceCount++;
+        }
+    }
+
+    if (event.occurrence === "first" && occurrenceCount === 1) return true;
+    if (event.occurrence === "second" && occurrenceCount === 2) return true;
+    if (event.occurrence === "third" && occurrenceCount === 3) return true;
+    if (event.occurrence === "last") {
+        let lastOccurrenceDate = new Date(year, month + 1, 0); // Last day of month
+        return lastOccurrenceDate.toLocaleString('en-us', { weekday: 'long' }) === event.dayName;
+    }
+
+    return false;
+}
+
 
 // Function for moving to previous Month
 function previousMonthBtn(year, month){
