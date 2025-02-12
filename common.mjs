@@ -3,7 +3,7 @@ import daysData from "./days.json" with { type: "json" };
 // Function to generate calendar grid for a given month
 
 function monthGrid(year, month){
-    let dayOne = new Date(Date.UTC(year, month, 1).getUTCDay();
+    let dayOne = new Date(Date.UTC(year, month, 1)).getUTCDay();
     dayOne = dayOne === 0? 7 : dayOne;// adjust sunday as 7th day
     let LastDate = daysInMonth(year, month)// let us know that february has 29 days in leap years
     let dayEnd = new Date(year, month, LastDate ).getDay()
@@ -41,19 +41,37 @@ function daysInMonth(year, month) {
     return new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
 }
 
-function nthWeekdayofMonth(year, month, weekday, n){
+function nthWeekdayOfMonth(year, month, weekday, occurrence) {
     let count = 0;
-    for (let day = 1; day = <= daysInMonth(year, month); day ++){
-        let date = New Date (year, month, day);
-        if (date.getDay() === weekday){
-            count ++;
-        if (count == n){
-            return day;
-        }       
-     }
+    let lastOccurrence = null;
+
+    for (let day = 1; day <= daysInMonth(year, month); day++) {
+        let date = new Date(Date.UTC(year, month, day));
+        if (date.getUTCDay() === weekday) {
+            count++;
+
+            // Handle "last" occurrence case
+            lastOccurrence = day;
+
+            if (occurrence === "first" && count === 1) return day;
+            if (occurrence === "second" && count === 2) return day;
+            if (occurrence === "third" && count === 3) return day;
+            if (occurrence === "fourth" && count === 4) return day;
+        }
+    
     }
-    return null;// if the nth weekday doesn't exist
+
+    // If "last" was requested, return the last occurrence found
+    return occurrence === "last" ? lastOccurrence : null;
+
 }
+console.log(nthWeekdayOfMonth(2024, 9, 2, "second")); // October 2024, 2nd Tuesday (Ada Lovelace Day)
+console.log(nthWeekdayOfMonth(2024, 4, 6, "second")); // May 2024, 2nd Saturday (International Binturong Day)
+console.log(nthWeekdayOfMonth(2024, 8, 6, "first"));  // September 2024, 1st Saturday (International Vulture Awareness Day)
+console.log(nthWeekdayOfMonth(2024, 8, 6, "third"));  // September 2024, 3rd Saturday (International Red Panda Day)
+console.log(nthWeekdayOfMonth(2024, 9, 5, "last"));   // October 2024, last Friday (World Lemur Day)
+
+
 // this helps to assess if the date is a commemorative day
 
 function isEventDay(event, year, month, day) {
@@ -102,18 +120,15 @@ function findEventForDay(events, year, month, day) {
 }
 
 
-// findEventForDay([{
-//     "name": "International Binturong Day",
-//     "monthName": "May",
-//     "dayName": "Saturday",
-//     "occurrence": "second",
-//     "descriptionURL": "https://codeyourfuture.github.io/The-Piscine/days/binturongs.txt"
-// }], 2022, 4, 14)
 
 
-
-
-
-
-
-export{monthGrid, isEventDay, getEventsForMonth, findEventForDay }         
+export { 
+    monthGrid, 
+    isEventDay, 
+    getEventsForMonth, 
+    findEventForDay, 
+    nthWeekdayOfMonth, 
+    isLeapYear, 
+    daysInMonth 
+};
+   

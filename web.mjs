@@ -1,5 +1,5 @@
 
-import { monthGrid, getEventsForMonth, findEventForDay,  } from "./common.mjs";
+import { monthGrid, getEventsForMonth, findEventForDay, isLeapYear, daysInMonth, nthWeekdayOfMonth} from "./common.mjs";
 
 
 window.onload = function() {
@@ -58,6 +58,7 @@ function renderCalendar() {
                     eventName = `<br><span class="event">${event.name}</span>`;
                     eventClass = 'class="commemorative-day"';// highlight class
                 } 
+            
             }
          
             calendarTableHTML += `<td ${eventClass}>${day || ""} ${eventName}</td>`;
