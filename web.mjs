@@ -1,5 +1,5 @@
 
-import { monthGrid, getEventsForMonth, findEventForDay } from "./common.mjs";
+import { monthGrid, getEventsForMonth, findEventForDay,  } from "./common.mjs";
 
 
 window.onload = function() {

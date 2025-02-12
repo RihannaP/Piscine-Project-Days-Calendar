@@ -5,7 +5,7 @@ import daysData from "./days.json" with { type: "json" };
 function monthGrid(year, month){
     let dayOne = new Date(Date.UTC(year, month, 1).getUTCDay();
     dayOne = dayOne === 0? 7 : dayOne;// adjust sunday as 7th day
-    let LastDate = daysInMonth(year, month)
+    let LastDate = daysInMonth(year, month)// let us know that february has 29 days in leap years
     let dayEnd = new Date(year, month, LastDate ).getDay()
     let gridArray =[];
     let week = new Array(7).fill(null);
@@ -35,9 +35,25 @@ function isLeapYear(year) {
 
 // Function to get days in a month
 function daysInMonth(year, month) {
+    if (month ===1){
+        return isLeapYear (year)? 29: 28;
+    }
     return new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
 }
 
+function nthWeekdayofMonth(year, month, weekday, n){
+    let count = 0;
+    for (let day = 1; day = <= daysInMonth(year, month); day ++){
+        let date = New Date (year, month, day);
+        if (date.getDay() === weekday){
+            count ++;
+        if (count == n){
+            return day;
+        }       
+     }
+    }
+    return null;// if the nth weekday doesn't exist
+}
 // this helps to assess if the date is a commemorative day
 
 function isEventDay(event, year, month, day) {
