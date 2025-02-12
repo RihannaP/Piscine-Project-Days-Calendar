@@ -3,11 +3,11 @@ import daysData from "./days.json" with { type: "json" };
 // Function to generate calendar grid for a given month
 
 function monthGrid(year, month){
-    let dayOne = new Date(year, month, 1).getDay()
-    dayOne = dayOne === 0? 7 : dayOne;
-    let LastDate = new Date(year, month+1, 0).getDate()
+    let dayOne = new Date(Date.UTC(year, month, 1).getUTCDay();
+    dayOne = dayOne === 0? 7 : dayOne;// adjust sunday as 7th day
+    let LastDate = daysInMonth(year, month)
     let dayEnd = new Date(year, month, LastDate ).getDay()
-    let gridArray =[]
+    let gridArray =[];
     let week = new Array(7).fill(null);
 
     for (let i = 1; i < dayOne; i++) {
@@ -28,7 +28,15 @@ function monthGrid(year, month){
    return gridArray;
 
 }
+// Function to check leap year
+function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+}
 
+// Function to get days in a month
+function daysInMonth(year, month) {
+    return new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+}
 
 // this helps to assess if the date is a commemorative day
 
