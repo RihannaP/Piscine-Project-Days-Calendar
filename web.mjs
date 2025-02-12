@@ -1,5 +1,5 @@
 
-import { monthgrid, } from "./common.mjs";
+import { monthgrid,isEventDay } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
 window.onload = function() {
@@ -84,43 +84,6 @@ function renderCalendar() {
     calendarTableHTML += "</tbody></table>";
 
     calendar.innerHTML = calendarTableHTML;
-}
-// this helps to assess if the date is a commemorative day
-
-function isEventDay(event, year, month, day) {
-    let eventDate = new Date(year, month, day);
-    let eventDayName = eventDate.toLocaleString('en-us', { weekday: 'long' });
-    console.log(`Checking if ${event.name} (${event.dayName}, ${event.occurrence}) matches ${day} (${eventDayName})`);
-
-    if (event.dayName !== eventDayName) {
-        console.log(`Day mismatch: Expected ${event.dayName}, got ${eventDayName}`);
-        return false; // Skip if it's not the correct weekday
-    }
-
-    let occurrences = [];
-    
-    for (let d = 1; d <= 31; d++) {
-        let tempDate = new Date(year, month, d);
-        if (tempDate.getMonth() !== month) break; // Stop when the next month starts
-
-        if (tempDate.toLocaleString('en-us', { weekday: 'long' }) === event.dayName) {
-            occurrences.push(d);
-        }
-    }
-    console.log(`Occurrences of ${event.dayName} in month:`, occurrences);
-
-    let occurrenceIndex = ["first", "second", "third", "fourth"].indexOf(event.occurrence);
-    if (occurrenceIndex !== -1 && occurrences[occurrenceIndex] === day) {
-        console.log(`Matched ${event.name} on ${day}`);
-        return true;
-    }
-
-    if (event.occurrence === "last" && occurrences[occurrences.length - 1] === day) {
-        return true;
-        console.log(`Matched last occurrence of ${event.name} on ${day}`);
-    }
-    console.log(`No match for ${event.name} on ${day}`);
-    return false;
 }
 
     

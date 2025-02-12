@@ -141,4 +141,4 @@ function isEventDay(event, year, month, day) {
 
 
 
-export{monthgrid }         
+export{monthgrid, isEventDay }         
