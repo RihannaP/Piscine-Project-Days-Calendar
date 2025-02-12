@@ -72,7 +72,11 @@ function isEventDay(event, year, month, day) {
 // This function checks if a day has an event and returns the event details
 function findEventForDay(events, year, month, day) {
     if (events.length === 0 ){return false}
+
     return events.find(e => isEventDay(e, year, month, day));
+
+     return events.find(e => isEventDay(e, year, month, day));
+
     // if (events.length === 0 ){console.log(false)}
     // console.log( events.find(e => isEventDay(e, year, month, day)))
 }
