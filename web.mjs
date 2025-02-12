@@ -1,5 +1,5 @@
 
-import { monthgrid,isEventDay } from "./common.mjs";
+import { monthgrid,isEventDay, getEventsForMonth, findEventForDay } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
 window.onload = function() {
@@ -27,6 +27,7 @@ document.body.appendChild(container);
 
 function renderCalendar() {
     let grid = monthgrid(currentYear, currentMonth);
+    let eventsForMonth = getEventsForMonth(currentYear, currentMonth);
     let calendarTableHTML = `
         <h2>${months[currentMonth]} ${currentYear}</h2>
         <table border="1">
@@ -44,38 +45,21 @@ function renderCalendar() {
             <tbody>
     `;
 
-    // Get events for the current month
-    let eventsForMonth = daysData.filter(event => 
-        new Date(`${event.monthName} 1, ${currentYear}`).getMonth() === currentMonth
-    );
-//debugging console log
-    console.log("All Events Data:", daysData);
-
-    // console.log("Filtered Events for", months[currentMonth], currentYear, ":", eventsForMonth);
-
-    console.log("Filtered Events:", eventsForMonth);
-
-
     grid.forEach(week => {
         calendarTableHTML += "<tr>";
         week.forEach(day => {
-            console.log("Checking day:", day);// debugging and checking if the day is correctly showing
             let eventName = "";
             let eventClass = "";
-            
+
             if (day) {
-                let event = eventsForMonth.find(e => isEventDay(e, currentYear, currentMonth, day));
-                console.log("Found event:", event);
+                let event = findEventForDay(eventsForMonth, currentYear, currentMonth, day);
+                
                 if (event) {
-                console.log(`Adding class to day ${day}:`, event.name);
                     eventName = `<br><span class="event">${event.name}</span>`;
                     eventClass = 'class="commemorative-day"';// highlight class
-                } else {
-                    console.log(`No event for day ${day}`); 
-                }
+                } 
             }
-            // console.log(`Day : ${day}, Event: ${eventName}, Class: ${eventClass}`); // debug commemorative day 
-
+         
             calendarTableHTML += `<td ${eventClass}>${day || ""} ${eventName}</td>`;
         });          
         calendarTableHTML += "</tr>";
@@ -85,8 +69,6 @@ function renderCalendar() {
 
     calendar.innerHTML = calendarTableHTML;
 }
-
-    
 
 
 

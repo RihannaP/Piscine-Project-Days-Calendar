@@ -1,9 +1,5 @@
-// This is a placeholder file which shows how you can define functions which can be used from both a browser script and a node script. You can delete the contents of the file once you have understood how it works.
 
-function getGreeting() {
-    return "Hello";
-}
- 
+import daysData from "./days.json" with { type: "json" };
 // Function to generate calendar grid for a given month
 
 function monthgrid(year, month){
@@ -29,75 +25,18 @@ function monthgrid(year, month){
         }
         
     }
-  //  console.log(gridArray)
    return gridArray;
 
 }
 
-function renderCalendar() {
-    let grid = monthgrid(currentYear, currentMonth);
-    let calendarTableHTML = `
-        <h2>${months[currentMonth]} ${currentYear}</h2>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                    <th>Sunday</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
 
-    // Get events for the current month
-    let eventsForMonth = daysData.filter(event => 
-        new Date(`${event.monthName} 1, ${currentYear}`).getMonth() === currentMonth
-    );
-//debugging console log
-    console.log("All Events Data:", daysData);
-    console.log("Filtered Events:", eventsForMonth);
-
-
-    grid.forEach(week => {
-        calendarTableHTML += "<tr>";
-        week.forEach(day => {
-            console.log("Checking day:", day);// debugging and checking if the day is correctly showing
-            let eventName = "";
-            let eventClass = "";
-            
-            if (day) {
-                let event = eventsForMonth.find(e => isEventDay(e, currentYear, currentMonth, day));
-                console.log("Found event:", event);
-                if (event) {
-                console.log(`Adding class to day ${day}:`, event.name);
-                    eventName = `<br><span class="event">${event.name}</span>`;
-                    eventClass = 'class="commemorative-day"';// highlight class
-                } else {
-                    console.log(`No event for day ${day}`); 
-                }
-            }
-
-            calendarTableHTML += `<td ${eventClass}>${day || ""} ${eventName}</td>`;
-        });          
-        calendarTableHTML += "</tr>";
-    });
-
-    calendarTableHTML += "</tbody></table>";
-    calendar.innerHTML = calendarTableHTML;
-}
 // this helps to assess if the date is a commemorative day
 
 function isEventDay(event, year, month, day) {
-    let eventDate = new Date(year, month, day);
-    let eventDayName = eventDate.toLocaleString('en-us', { weekday: 'long' });
-    console.log(`Checking if ${event.name} (${event.dayName}, ${event.occurrence}) matches ${day} (${eventDayName})`);
-
+    let eventDate = new Date(year, month, day); // e.g Mon Feb 10 2025 00:00:00 GMT+0000 
+    let eventDayName = eventDate.toLocaleString('en-us', { weekday: 'long' }); // e.g Monday
+    
     if (event.dayName !== eventDayName) {
-        console.log(`Day mismatch: Expected ${event.dayName}, got ${eventDayName}`);
         return false; // Skip if it's not the correct weekday
     }
 
@@ -111,23 +50,30 @@ function isEventDay(event, year, month, day) {
             occurrences.push(d);
         }
     }
-    console.log(`Occurrences of ${event.dayName} in month:`, occurrences);
 
     let occurrenceIndex = ["first", "second", "third", "fourth"].indexOf(event.occurrence);
     if (occurrenceIndex !== -1 && occurrences[occurrenceIndex] === day) {
-        console.log(`Matched ${event.name} on ${day}`);
         return true;
     }
 
     if (event.occurrence === "last" && occurrences[occurrences.length - 1] === day) {
         return true;
-        console.log(`Matched last occurrence of ${event.name} on ${day}`);
     }
-    console.log(`No match for ${event.name} on ${day}`);
     return false;
 }
 
+// Filters the events for the specified month
+ function getEventsForMonth(year, month) {
+    return daysData.filter(event => 
+        new Date(`${event.monthName}, ${year}`).getMonth() === month
+    );
+}
                                               
+// This function checks if a day has an event and returns the event details
+function findEventForDay(events, year, month, day) {
+    if (events.length === 0 ){return false}
+    return events.find(e => isEventDay(e, year, month, day));
+}
 
 
 
@@ -140,5 +86,4 @@ function isEventDay(event, year, month, day) {
 
 
 
-
-export{monthgrid, isEventDay }         
+export{monthgrid, isEventDay, getEventsForMonth, findEventForDay }         
