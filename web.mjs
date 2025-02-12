@@ -1,6 +1,6 @@
 
-import { monthgrid,isEventDay, getEventsForMonth, findEventForDay } from "./common.mjs";
-import daysData from "./days.json" with { type: "json" };
+import { monthGrid, getEventsForMonth, findEventForDay } from "./common.mjs";
+
 
 window.onload = function() {
     renderCalendar()    
@@ -26,7 +26,7 @@ document.body.appendChild(container);
 
 
 function renderCalendar() {
-    let grid = monthgrid(currentYear, currentMonth);
+    let grid = monthGrid(currentYear, currentMonth);
     let eventsForMonth = getEventsForMonth(currentYear, currentMonth);
     let calendarTableHTML = `
         <h2>${months[currentMonth]} ${currentYear}</h2>

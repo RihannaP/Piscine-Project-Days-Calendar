@@ -2,7 +2,7 @@
 import daysData from "./days.json" with { type: "json" };
 // Function to generate calendar grid for a given month
 
-function monthgrid(year, month){
+function monthGrid(year, month){
     let dayOne = new Date(year, month, 1).getDay()
     dayOne = dayOne === 0? 7 : dayOne;
     let LastDate = new Date(year, month+1, 0).getDate()
@@ -64,18 +64,27 @@ function isEventDay(event, year, month, day) {
 
 // Filters the events for the specified month
  function getEventsForMonth(year, month) {
-    return daysData.filter(event => 
-        new Date(`${event.monthName}, ${year}`).getMonth() === month
-    );
+     return daysData.filter(event => 
+         new Date(`${event.monthName}, ${year}`).getMonth() === month  
+    )
 }
                                               
 // This function checks if a day has an event and returns the event details
 function findEventForDay(events, year, month, day) {
-    if (events.length === 0 ){return false}
-    return events.find(e => isEventDay(e, year, month, day));
+    // if (events.length === 0 ){return false}
+    // return events.find(e => isEventDay(e, year, month, day));
+    if (events.length === 0 ){console.log(false)}
+    console.log( events.find(e => isEventDay(e, year, month, day)))
 }
 
 
+findEventForDay([{
+    "name": "International Binturong Day",
+    "monthName": "May",
+    "dayName": "Saturday",
+    "occurrence": "second",
+    "descriptionURL": "https://codeyourfuture.github.io/The-Piscine/days/binturongs.txt"
+}], 2022, 4, 14)
 
 
 
@@ -83,7 +92,4 @@ function findEventForDay(events, year, month, day) {
 
 
 
-
-
-
-export{monthgrid, isEventDay, getEventsForMonth, findEventForDay }         
+export{monthGrid, isEventDay, getEventsForMonth, findEventForDay }         
