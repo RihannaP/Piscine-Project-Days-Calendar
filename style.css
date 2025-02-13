@@ -20,20 +20,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Sidebar (Weather & Tasks) */
-.sidebar {
-    background: #5A7FF0; /* Light blue */
-    color: white;
-    padding: 20px;
-    width: 35%;
-}
-
-.weather {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-}
-
 .tasks {
     margin-top: 20px;
 }
@@ -48,7 +34,7 @@ body {
 
 /* Calendar Section */
 .calendar {
-    width: 65%;
+    width: 100%;
     padding: 20px;
     text-align: center;
 }
@@ -58,28 +44,6 @@ h2 {
     font-weight: bold;
     color: #E74C3C;
     margin-bottom: 10px;
-}
-
-/* Navigation */
-.navigation {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.nav-btn {
-    background: #E74C3C;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-.nav-btn:hover {
-    background: #C0392B;
 }
 
 /* Year Selector */
