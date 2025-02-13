@@ -189,3 +189,13 @@ select:hover {
       color: red;
       display: block;
   }
+
+  .commemorative-day {
+    background-color: yellow;
+    font-weight: bold;
+}
+.event {
+    font-size: 12px;
+    color: red;
+    display: block;
+}
