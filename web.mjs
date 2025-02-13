@@ -108,7 +108,7 @@ function nextMonthBtn(year, month){// creating the function to move to the next 
 
 //year selection dropdown 
 let yearSelect = document.createElement('select');
-for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+for (let i = currentYear - 25; i <= currentYear + 25; i++) {
     let option = document.createElement('option');
     option.value = i;
     option.textContent = i;
