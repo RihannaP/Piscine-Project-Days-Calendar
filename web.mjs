@@ -113,16 +113,16 @@ labelY.setAttribute('for', 'year-select'); // Properly associate with the select
 labelY.textContent = 'Scroll Year: ';
 let yearSelect = document.createElement('select');
 yearSelect.id = 'year-select';
-for (let i = currentYear - 25; i <= currentYear + 25; i++) {
-    let option = document.createElement('option');
-    option.value = i;
-    option.textContent = i;
-    if (i === currentYear) {
-        option.selected = true;
-    }
-    yearSelect.appendChild(option);
+// for (let i = currentYear - 25; i <= currentYear + 25; i++) {
+//     let option = document.createElement('option');
+//     option.value = i;
+//     option.textContent = i;
+//     if (i === currentYear) {
+//         option.selected = true;
+//     }
+//     yearSelect.appendChild(option);
     
-}
+// }
 document.body.appendChild(labelY);
 document.body.appendChild(yearSelect);
 
@@ -135,7 +135,7 @@ document.body.appendChild(yearSelect);
     option.textContent = currentYear;
     yearSelect.appendChild(option);
 }
-
+updateYearSelector()
 
 // Handle scroll (mouse wheel)
 yearSelect.addEventListener("wheel", (event) => {
