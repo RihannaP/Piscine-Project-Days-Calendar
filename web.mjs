@@ -110,7 +110,7 @@ function nextMonthBtn(year, month){// creating the function to move to the next 
 
 let labelY = document.createElement('label');
 labelY.setAttribute('for', 'year-select'); // Properly associate with the select element
-labelY.textContent = 'Select Year: ';
+labelY.textContent = 'Scroll Year: ';
 let yearSelect = document.createElement('select');
 yearSelect.id = 'year-select';
 for (let i = currentYear - 25; i <= currentYear + 25; i++) {
@@ -121,15 +121,39 @@ for (let i = currentYear - 25; i <= currentYear + 25; i++) {
         option.selected = true;
     }
     yearSelect.appendChild(option);
+    
 }
 document.body.appendChild(labelY);
 document.body.appendChild(yearSelect);
 
-// calendar change when year is changed
-yearSelect.addEventListener('change', function() {
-    currentYear = parseInt(this.value);
-    renderCalendar();
+
+ // Function to update the dropdown
+ function updateYearSelector() {
+    yearSelect.innerHTML = ""; // Clear existing options
+    const option = document.createElement("option");
+    option.value = currentYear;
+    option.textContent = currentYear;
+    yearSelect.appendChild(option);
+}
+
+
+// Handle scroll (mouse wheel)
+yearSelect.addEventListener("wheel", (event) => {
+    if (event.deltaY < 0) {
+        currentYear++; // Scroll up → Increase
+    } else {
+        currentYear--; // Scroll down → Decrease
+    }
+    updateYearSelector();
+    renderCalendar()
 });
+
+
+// // calendar change when year is changed
+// yearSelect.addEventListener('change', function() {
+//     currentYear = parseInt(this.value);
+//     renderCalendar();
+// });
 
 let labelM = document.createElement('label');
 labelM.setAttribute('for', 'month-select'); // Properly associate with the select element
