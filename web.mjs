@@ -107,7 +107,12 @@ function nextMonthBtn(year, month){// creating the function to move to the next 
 ////////////// SELECTION////////////
 
 //year selection dropdown 
+
+let labelY = document.createElement('label');
+labelY.setAttribute('for', 'year-select'); // Properly associate with the select element
+labelY.textContent = 'Select Year: ';
 let yearSelect = document.createElement('select');
+yearSelect.id = 'year-select';
 for (let i = currentYear - 25; i <= currentYear + 25; i++) {
     let option = document.createElement('option');
     option.value = i;
@@ -117,6 +122,7 @@ for (let i = currentYear - 25; i <= currentYear + 25; i++) {
     }
     yearSelect.appendChild(option);
 }
+document.body.appendChild(labelY);
 document.body.appendChild(yearSelect);
 
 // calendar change when year is changed
@@ -125,8 +131,11 @@ yearSelect.addEventListener('change', function() {
     renderCalendar();
 });
 
-
+let labelM = document.createElement('label');
+labelM.setAttribute('for', 'month-select'); // Properly associate with the select element
+labelM.textContent = 'Select Month: ';
 let monthSelect = document.createElement('select');
+monthSelect.id = 'month-select';
 // Array of months as strings
   months.map((item, index) => {
     let option = document.createElement('option');
@@ -135,6 +144,7 @@ let monthSelect = document.createElement('select');
     if(index === currentMonth){ option.selected = true}
     monthSelect.append(option);
 })
+document.body.appendChild(labelM);
 document.body.append(monthSelect)
 
 // calendar change when Month is changed
