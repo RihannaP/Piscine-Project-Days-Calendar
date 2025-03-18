@@ -11,6 +11,11 @@ The goal is to present this data **usefully and interactively** for users, allow
 
 ---
 
+## 🏧 Live Demo  
+Check out the deployed version here: [Days Calendar](https://days-calendar.netlify.app)  
+
+---
+
 ## 🏗 Features  
 
 ✔️ **Dynamic Calendar UI** - Displays the days of the current month in a structured weekly grid.  
@@ -68,6 +73,4 @@ For **Google Calendar Import Testing**, follow the steps:
 
 
 
-🚀 **Happy Coding!** Let us know if you have any questions! 😊  
-```  
-
+🚀 **Happy Coding!** Let us know if you have any questions! 😊
